@@ -1,1 +1,2 @@
-*.txt -crlf
+* text=auto
+*.js text eol=lf
