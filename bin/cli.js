@@ -10,7 +10,8 @@ var args = utils.flatten(process.argv.slice(2).map(function (arg) {
   return expand(arg, '!node_modules/**/*.*')
 }))
 
-var defaultTocTemplate = fs.readFileSync(path.join(__dirname, '..', 'toc.mustache'), 'utf8')
+var defaultTocTemplatePath = path.join(__dirname, '..', 'toc.mustache')
+var defaultTocTemplate = fs.readFileSync(defaultTocTemplatePath, 'utf8')
 
 args.forEach(function (fileName) {
   var input = fs.readFileSync(fileName, 'utf8')
