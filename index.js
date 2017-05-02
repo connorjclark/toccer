@@ -1,47 +1,54 @@
 var fs = require('fs')
 var Mustache = require('mustache')
 var expand = require('glob-expand')
+var marked = require('marked')
+var toMarkdown = require('to-markdown')
 
 var utils = require('./lib/utils')
 
 var isCLI = require.main === module
 
-function matchTocCrap (markdown) {
-  var match = markdown.match(/([\s\S]*)(<!-- toc[\s\S]* start [\s\S]*-->)([.\s\n]*)(<!-- toc end -->)([\s\S]*)/)
-  var beforeToc = match[1]
-  var tocHeader = match[2]
-  var insideToc = match[3]
-  var tocFooter = match[4]
-  var afterToc = match[5]
-
-  return {beforeToc, tocHeader, insideToc, tocFooter, afterToc}
-}
-
 function toccerize (markdown, tocTemplate) {
-  markdown = utils.removeToccerAnchors(markdown)
+  var tokens = marked.lexer(markdown)
 
-  // the TOC was inside a span HTML element, but github's markdown renderer ignores stuff inside HTML elements ...
-  // So I came up with this
-  // <!-- toc start max-level=2 -->
-  // <!-- toc end -->
+  var tocTokenIndex
+  var tocOptions
 
-  // remove contents of old table, get attributes
-  // :'(
-  var tocCrap = matchTocCrap(markdown)
+  for (var i = 0; i < tokens.length; i++) {
+    var token = tokens[i]
 
-  var maxLevelMatch = tocCrap.tocHeader.match(/max-level=(\d+)/)
-  var maxLevel = maxLevelMatch ? maxLevelMatch[1] : 100
+    if (token.type === 'paragraph') {
+      var match = token.text.match(/\[\]\((toc.*)\)/)
+      if (match) {
+        tocOptions = match[1].split(/\s+/).reduce(function (acc, option) {
+          var keyValuePair = option.split('=')
+          acc[keyValuePair[0]] = keyValuePair[1] || true
+          return acc
+        }, {})
+        tocTokenIndex = i
+        break
+      }
+    }
+  }
 
-  // TODO: refactor this.
-  var findSectionsResult = utils.findSections(markdown, maxLevel)
-  var sections = findSectionsResult.sections
-  var outputLines = findSectionsResult.outputLines
+  // remove existing TOC
+  if (tocTokenIndex && tokens[tocTokenIndex + 1].type === 'list_start') {
+    var matchingEnd = utils.findIndexOfMatchingListEnd(tokens, tocTokenIndex + 1)
+    tokens.splice(tocTokenIndex + 1, matchingEnd - tocTokenIndex)
+  }
+
+  var maxLevel = tocOptions['max-level'] ? parseInt(tocOptions['max-level']) : 100
+  var sections = utils.findSections(tokens, maxLevel)
 
   var tocMarkdown = Mustache.render(tocTemplate, {sections})
+  var tocTokens = marked.lexer(tocMarkdown)
 
-  var tocCrap2 = matchTocCrap(outputLines.join('\n'))
+  tokens.splice.apply(tokens, [tocTokenIndex + 1, 0].concat(tocTokens))
 
-  return tocCrap2.beforeToc + tocCrap2.tocHeader + '\n\n' + tocMarkdown + tocCrap2.tocFooter + tocCrap2.afterToc
+  var html = marked.parser(tokens)
+  html = html.replace(/\n<\/code><\/pre>/g, '</code></pre>')
+
+  return toMarkdown(html) + '\n'
 }
 
 if (isCLI) {

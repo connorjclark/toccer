@@ -1,7 +1,6 @@
 # Hello World!
 
-<!-- toc start max-level=2 -->
-<!-- toc end -->
+[](toc max-level=2)
 
 ## Section One
 

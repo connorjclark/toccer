@@ -1,7 +1,6 @@
 # Hello World!
 
-<!-- toc start -->
-<!-- toc end -->
+[](toc)
 
 ## Section One
 

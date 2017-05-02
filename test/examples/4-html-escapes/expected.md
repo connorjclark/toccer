@@ -1,23 +1,19 @@
 # Hello World!
 
-<!-- toc start -->
+[](toc)
 
-* [Section One](#section-one)
-* [Section Two](#section-two)
-* [Section Three](#section-three)
-<!-- toc end -->
+*   [Section One](#section-one)
+*   [Section Two](#section-two)
+*   [Section Three](#section-three)
 
-<a class="toccer-anchor" name="section-one"></a>
 ## Section One
 
 > content
 
-<a class="toccer-anchor" name="section-two"></a>
 ## Section Two
 
 > content
 
-<a class="toccer-anchor" name="section-three"></a>
 ## Section Three
 
 > content
