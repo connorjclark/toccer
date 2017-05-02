@@ -2,13 +2,12 @@
 
 Tool for adding table of contents to markdown files.
 
-<span id="toc">
+<!-- toc start -->
+
 * [Installation](#installation)
 * [Usage](#usage)
-* [This is a header](#this-is-a-header)
-* [more header](#more-header)
-  * [Limit Level](#limit-level)
-</span>
+* [Limit Level](#limit-level)
+<!-- toc end -->
 
 
 <a class="toccer-anchor" name="installation"></a>
@@ -23,26 +22,17 @@ To install `toccer` as a CLI tool: `npm install -g toccer`
 Place this HTML in your markdown
 
 ```html
-<span id="toc">
-* [Installation](#installation)
-* [Usage](#usage)
-* [This is a header](#this-is-a-header)
-* [more header](#more-header)
-  * [Limit Level](#limit-level)
-</span>
+<!-- toc start -->
+<!-- toc end -->
 ```
 
 Add some level two headers:
 
 ```markdown
-
-<a class="toccer-anchor" name="this-is-a-header"></a>
 ## This is a header
 
 content
 
-
-<a class="toccer-anchor" name="more-header"></a>
 ## more header
 
 more content
@@ -58,16 +48,11 @@ This will create a TOC in `path-to-markdown.md`!
 <a class="toccer-anchor" name="limit-level"></a>
 ### Limit Level
 
-Use the attribute `data-max-level` to limit how deep the TOC goes.
+Use the attribute `max-level` to limit how deep the TOC goes.
 
 ```html
-<span id="toc" data-max-level="3">
-* [Installation](#installation)
-* [Usage](#usage)
-* [This is a header](#this-is-a-header)
-* [more header](#more-header)
-  * [Limit Level](#limit-level)
-</span>
+<!-- toc start max-level=3 -->
+<!-- toc end -->
 ```
 
 This will only use up to level 3 headers in the TOC. 

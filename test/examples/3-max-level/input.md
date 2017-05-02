@@ -1,7 +1,7 @@
 # Hello World!
 
-<span id="toc" data-max-level="2">
-</span>
+<!-- toc start max-level=2 -->
+<!-- toc end -->
 
 ## Section One
 

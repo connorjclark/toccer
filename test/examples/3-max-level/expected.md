@@ -1,10 +1,10 @@
 # Hello World!
 
-<span id="toc" data-max-level="2">
+<!-- toc start max-level=2 -->
 * [Section One](#section-one)
 * [Section Two](#section-two)
 * [Section Three](#section-three)
-</span>
+<!-- toc end -->
 
 <a class="toccer-anchor" name="section-one"></a>
 ## Section One

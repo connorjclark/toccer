@@ -1,7 +1,7 @@
 # Hello World!
 
-<span id="toc">
-</span>
+<!-- toc start -->
+<!-- toc end -->
 
 ## Section One
 
