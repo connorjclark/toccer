@@ -19,7 +19,9 @@ function toccerize (markdown, tocTemplate) {
 
   var tocMarkdown = Mustache.render(tocTemplate, {sections})
 
-  var $ = cheerio.load(outputLines.join('\n'))
+  var $ = cheerio.load(outputLines.join('\n'), {
+    decodeEntities: false
+  })
   $('span#toc').text('\n' + tocMarkdown)
   return $.html()
 }
@@ -31,7 +33,6 @@ if (isCLI) {
 
   var defaultTocTemplate = fs.readFileSync('toc.mustache', 'utf8')
 
-  console.log(args)
   args.forEach(function (fileName) {
     var input = fs.readFileSync(fileName, 'utf8')
     var output = toccerize(input, defaultTocTemplate)
