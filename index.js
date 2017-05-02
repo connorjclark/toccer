@@ -1,21 +1,20 @@
 var fs = require('fs')
 var Mustache = require('mustache')
-var cheerio = require('cheerio')
 var expand = require('glob-expand')
 
 var utils = require('./lib/utils')
 
 var isCLI = require.main === module
 
-function matchTocCrap(markdown) {
+function matchTocCrap (markdown) {
   var match = markdown.match(/([\s\S]*)(<!-- toc[\s\S]* start [\s\S]*-->)([.\s\n]*)(<!-- toc end -->)([\s\S]*)/)
-  var beforeToc = match[1];
-  var tocHeader = match[2];
-  var insideToc = match[3];
-  var tocFooter = match[4];
-  var afterToc = match[5];
+  var beforeToc = match[1]
+  var tocHeader = match[2]
+  var insideToc = match[3]
+  var tocFooter = match[4]
+  var afterToc = match[5]
 
-  return {beforeToc, tocHeader, insideToc, tocFooter, afterToc};
+  return {beforeToc, tocHeader, insideToc, tocFooter, afterToc}
 }
 
 function toccerize (markdown, tocTemplate) {
@@ -28,10 +27,10 @@ function toccerize (markdown, tocTemplate) {
 
   // remove contents of old table, get attributes
   // :'(
-  var tocCrap = matchTocCrap(markdown);
-  
-  var maxLevelMatch = tocCrap.tocHeader.match(/max-level=(\d+)/);
-  var maxLevel = maxLevelMatch ? maxLevelMatch[1] : 100;
+  var tocCrap = matchTocCrap(markdown)
+
+  var maxLevelMatch = tocCrap.tocHeader.match(/max-level=(\d+)/)
+  var maxLevel = maxLevelMatch ? maxLevelMatch[1] : 100
 
   // TODO: refactor this.
   var findSectionsResult = utils.findSections(markdown, maxLevel)
@@ -40,9 +39,9 @@ function toccerize (markdown, tocTemplate) {
 
   var tocMarkdown = Mustache.render(tocTemplate, {sections})
 
-  var tocCrap2 = matchTocCrap(outputLines.join("\n"));
+  var tocCrap2 = matchTocCrap(outputLines.join('\n'))
 
-  return tocCrap2.beforeToc + tocCrap2.tocHeader + "\n\n" + tocMarkdown + tocCrap2.tocFooter + tocCrap2.afterToc;
+  return tocCrap2.beforeToc + tocCrap2.tocHeader + '\n\n' + tocMarkdown + tocCrap2.tocFooter + tocCrap2.afterToc
 }
 
 if (isCLI) {
