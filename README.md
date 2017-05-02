@@ -16,17 +16,22 @@ To install `toccer` as a CLI tool: `npm install -g toccer`
 
 Place link token somewhere in your markdown
 
-    [](toc)
+```markdown
+[](toc)
+```
 
 Add some level two headers:
 
-    ## This is a header
+```markdown
 
-    content
+## This is a header
 
-    ## more header
+content
 
-    more content
+## more header
+
+more content
+```
 
 Then, run the command: `toccer path-to-markdown.md`
 
@@ -38,6 +43,8 @@ This will create a TOC in `path-to-markdown.md`!
 
 Use the option `max-level` to limit how deep the TOC goes.
 
-    [](toc max-level=3)
+```markdown
+[](toc max-level=3)
+```
 
 This will only use up to level 3 headers in the TOC.

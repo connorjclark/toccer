@@ -1,12 +1,9 @@
-var fs = require('fs')
+#! /usr/bin/env node
+
 var Mustache = require('mustache')
-var expand = require('glob-expand')
 var marked = require('marked')
 var toMarkdown = require('to-markdown')
-
 var utils = require('./lib/utils')
-
-var isCLI = require.main === module
 
 function toccerize (markdown, tocTemplate) {
   var tokens = marked.lexer(markdown)
@@ -48,22 +45,17 @@ function toccerize (markdown, tocTemplate) {
   var html = marked.parser(tokens)
   html = html.replace(/\n<\/code><\/pre>/g, '</code></pre>')
 
-  return toMarkdown(html) + '\n'
+  return toMarkdown(html, {converters: [testConverter]}) + '\n'
 }
 
-if (isCLI) {
-  var args = utils.flatten(process.argv.slice(2).map(function (arg) {
-    return expand(arg, '!node_modules/**/*.*')
-  }))
-
-  var defaultTocTemplate = fs.readFileSync('toc.mustache', 'utf8')
-
-  args.forEach(function (fileName) {
-    var input = fs.readFileSync(fileName, 'utf8')
-    var output = toccerize(input, defaultTocTemplate)
-
-    fs.writeFileSync(fileName, output)
-  })
-} else {
-  module.exports = {toccerize}
+var testConverter = {
+  filter: function (node) {
+    return node.nodeName === 'PRE' && node.firstChild.nodeName === 'CODE'
+  },
+  replacement: function (content, node) {
+    var lang = node.firstChild.className.replace('lang-', '')
+    return '```' + lang + '\n' + node.firstChild.textContent + '\n```\n\n'
+  }
 }
+
+module.exports = {toccerize}
