@@ -44,7 +44,7 @@ This will create a TOC in `path-to-markdown.md`!
 Use the option `max-level` to limit how deep the TOC goes.
 
 ```markdown
-[](toc max-level=3)
+[](toc&max-level=3)
 ```
 
 This will only use up to level 3 headers in the TOC.

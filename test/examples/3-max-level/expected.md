@@ -1,6 +1,6 @@
 # Hello World!
 
-[](toc max-level=2)
+[](toc&max-level=2)
 
 *   [Section One](#section-one)
 *   [Section Two](#section-two)

@@ -4,6 +4,7 @@ var Mustache = require('mustache')
 var marked = require('marked')
 var toMarkdown = require('to-markdown')
 var utils = require('./lib/utils')
+var querystring = require('querystring')
 
 function toccerize (markdown, tocTemplate) {
   var tokens = marked.lexer(markdown)
@@ -22,6 +23,9 @@ function toccerize (markdown, tocTemplate) {
           acc[keyValuePair[0]] = keyValuePair[1] || true
           return acc
         }, {})
+
+        tocOptions = querystring.parse(match[1])
+
         tocTokenIndex = i
         break
       }

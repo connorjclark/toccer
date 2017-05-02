@@ -1,6 +1,6 @@
 {
   "name": "toccer",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -14,6 +14,7 @@
     "glob-expand": "^0.2.1",
     "marked": "^0.3.6",
     "mustache": "^2.3.0",
+    "querystring": "^0.2.0",
     "to-markdown": "^3.0.4"
   },
   "devDependencies": {
