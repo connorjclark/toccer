@@ -3,7 +3,7 @@
 var fs = require('fs')
 var expand = require('glob-expand')
 var toccer = require('../')
-var utils = require('../lib/utils')
+var utils = require('../utils')
 var path = require('path')
 
 var args = utils.flatten(process.argv.slice(2).map(function (arg) {

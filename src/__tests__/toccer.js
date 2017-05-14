@@ -1,24 +1,25 @@
 var assert = require('assert')
 var fs = require('fs')
 var path = require('path')
-var utils = require('../lib/utils')
-var toccer = require('../')
+// var utils = require('../lib/utils')
+// var toccer = require('../lib')
+import toccer from '../'
 
 function readFile (path) {
   return fs.readFileSync(path, 'utf8').replace(/\r\n/g, '\n')
 }
 
-describe('flatten', function () {
-  it('works', function () {
-    assert.deepEqual(utils.flatten([]), [])
-    assert.deepEqual(utils.flatten([[1]]), [1])
-    assert.deepEqual(utils.flatten([[1], 2]), [1, 2])
-    assert.deepEqual(utils.flatten([[1], [[2]]]), [1, 2])
-  })
-})
+// describe('flatten', function () {
+//   it('works', function () {
+//     assert.deepEqual(utils.flatten([]), [])
+//     assert.deepEqual(utils.flatten([[1]]), [1])
+//     assert.deepEqual(utils.flatten([[1], 2]), [1, 2])
+//     assert.deepEqual(utils.flatten([[1], [[2]]]), [1, 2])
+//   })
+// })
 
 describe('toccerize', function () {
-  var src = path.join('test', 'examples')
+  var src = path.join(__dirname, 'examples')
   var dirs = fs.readdirSync(src).filter(file => fs.statSync(path.join(src, file)).isDirectory())
 
   dirs.forEach(function (element) {

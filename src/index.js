@@ -3,7 +3,7 @@
 var Mustache = require('mustache')
 var marked = require('marked')
 var toMarkdown = require('to-markdown')
-var utils = require('./lib/utils')
+var utils = require('./utils')
 var querystring = require('querystring')
 
 function toccerize (markdown, tocTemplate) {
@@ -62,4 +62,4 @@ var testConverter = {
   }
 }
 
-module.exports = {toccerize}
+export default {toccerize}
