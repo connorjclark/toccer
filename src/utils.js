@@ -26,13 +26,20 @@ const findSections = (tokens, maxLevel) => {
   return sections
 }
 
+const START = 'list_start'
+const END = 'list_end'
+
 const findIndexOfMatchingListEnd = (tokens, startIndex) => {
+  if (tokens[startIndex].type !== START) {
+    throw new Error(`Could not find initial '${START}' at position ${startIndex}`)
+  }
+
   let listDepth = 1
 
   for (let i = startIndex + 1; i < tokens.length; i++) {
-    if (tokens[i].type === 'list_start') {
+    if (tokens[i].type === START) {
       listDepth += 1
-    } else if (tokens[i].type === 'list_end') {
+    } else if (tokens[i].type === END) {
       listDepth -= 1
     }
 
@@ -41,7 +48,7 @@ const findIndexOfMatchingListEnd = (tokens, startIndex) => {
     }
   }
 
-  throw new Error('Could not find matching list_end')
+  throw new Error(`Could not find matching ${END}`)
 }
 
 export default {flatten, findIndexOfMatchingListEnd, findSections}
