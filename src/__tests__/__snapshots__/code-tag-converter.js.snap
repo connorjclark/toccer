@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`codeTagConverter works with lang 1`] = `
+"\`\`\`js
+console.log(1)
+\`\`\`"
+`;
+
+exports[`codeTagConverter works without lang 1`] = `
+"\`\`\`
+console.log(1)
+\`\`\`"
+`;

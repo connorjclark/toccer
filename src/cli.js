@@ -15,6 +15,6 @@ var defaultTocTemplate = fs.readFileSync(defaultTocTemplatePath, 'utf8')
 
 args.forEach(function (fileName) {
   var input = fs.readFileSync(fileName, 'utf8')
-  var output = toccer.toccerize(input, defaultTocTemplate)
+  var output = toccer(input, defaultTocTemplate)
   fs.writeFileSync(fileName, output)
 })

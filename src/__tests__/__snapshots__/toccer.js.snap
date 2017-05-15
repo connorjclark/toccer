@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`toccerize example 1-hello.md works 1`] = `
+exports[`toccer example 1-hello.md works 1`] = `
 "# Hello World!
 
 [](toc)
@@ -23,7 +23,7 @@ content
 "
 `;
 
-exports[`toccerize example 2-subsections.md works 1`] = `
+exports[`toccer example 2-subsections.md works 1`] = `
 "# Hello World!
 
 [](toc)
@@ -56,7 +56,7 @@ content
 "
 `;
 
-exports[`toccerize example 3-max-level.md works 1`] = `
+exports[`toccer example 3-max-level.md works 1`] = `
 "# Hello World!
 
 [](toc&max-level=2)
@@ -87,7 +87,7 @@ content
 "
 `;
 
-exports[`toccerize example 4-html-escapes.md works 1`] = `
+exports[`toccer example 4-html-escapes.md works 1`] = `
 "# Hello World!
 
 [](toc)
@@ -110,7 +110,7 @@ exports[`toccerize example 4-html-escapes.md works 1`] = `
 "
 `;
 
-exports[`toccerize example 5-code-blocks.md works 1`] = `
+exports[`toccer example 5-code-blocks.md works 1`] = `
 "# Hello World!
 
 [](toc)
