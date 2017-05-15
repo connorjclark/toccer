@@ -1,8 +1,7 @@
-function flatten (arr) {
-  return arr.reduce(function (flat, toFlatten) {
-    return flat.concat(Array.isArray(toFlatten) ? flatten(toFlatten) : toFlatten)
-  }, [])
-}
+const flatten = list => list.reduce(
+  (acc, value) => acc.concat(Array.isArray(value) ? flatten(value) : value),
+  []
+)
 
 function findSections (tokens, maxLevel) {
   var sections = []
@@ -45,4 +44,4 @@ function findIndexOfMatchingListEnd (tokens, startIndex) {
   throw new Error('Could not find matching list_end')
 }
 
-module.exports = {flatten, findIndexOfMatchingListEnd, findSections}
+export default {flatten, findIndexOfMatchingListEnd, findSections}

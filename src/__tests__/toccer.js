@@ -1,40 +1,25 @@
-var assert = require('assert')
-var fs = require('fs')
-var path = require('path')
-// var utils = require('../lib/utils')
-// var toccer = require('../lib')
 import toccer from '../'
+import fs from 'fs'
+import path from 'path'
 
-function readFile (path) {
-  return fs.readFileSync(path, 'utf8').replace(/\r\n/g, '\n')
-}
-
-// describe('flatten', function () {
-//   it('works', function () {
-//     assert.deepEqual(utils.flatten([]), [])
-//     assert.deepEqual(utils.flatten([[1]]), [1])
-//     assert.deepEqual(utils.flatten([[1], 2]), [1, 2])
-//     assert.deepEqual(utils.flatten([[1], [[2]]]), [1, 2])
-//   })
-// })
+const readFile = path => fs.readFileSync(path, 'utf8').replace(/\r\n/g, '\n')
 
 describe('toccerize', function () {
   var src = path.join(__dirname, 'examples')
-  var dirs = fs.readdirSync(src).filter(file => fs.statSync(path.join(src, file)).isDirectory())
+  var files = fs.readdirSync(src).filter(file => fs.statSync(path.join(src, file)).isFile())
 
-  dirs.forEach(function (element) {
-    var input = readFile(path.join(src, element, 'input.md'))
-    var expected = readFile(path.join(src, element, 'expected.md'))
+  files.forEach(function (file) {
+    var input = readFile(path.join(src, file))
     var tocTemplate = readFile('./toc.mustache')
 
     var toccerized = toccer.toccerize(input, tocTemplate)
 
-    it('example ' + element + ' works', function () {
-      assert.equal(toccerized, expected)
+    it(`example ${file} works`, function () {
+      expect(toccerized).toMatchSnapshot()
     })
 
-    it('example ' + element + ' is idempotent', function () {
-      assert.equal(toccer.toccerize(toccerized, tocTemplate), toccerized)
+    it(`example ${file} is idempotent`, function () {
+      expect(toccer.toccerize(toccerized, tocTemplate)).toEqual(toccerized)
     })
   })
 })

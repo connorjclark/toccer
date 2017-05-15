@@ -1,10 +1,10 @@
 #! /usr/bin/env node
 
-var fs = require('fs')
-var expand = require('glob-expand')
-var toccer = require('../')
-var utils = require('../utils')
-var path = require('path')
+import fs from 'fs'
+import expand from 'glob-expand'
+import toccer from './'
+import utils from './utils'
+import path from 'path'
 
 var args = utils.flatten(process.argv.slice(2).map(function (arg) {
   return expand(arg, '!node_modules/**/*.*')

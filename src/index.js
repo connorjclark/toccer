@@ -1,10 +1,10 @@
 #! /usr/bin/env node
 
-var Mustache = require('mustache')
-var marked = require('marked')
-var toMarkdown = require('to-markdown')
-var utils = require('./utils')
-var querystring = require('querystring')
+import Mustache from 'mustache'
+import marked from 'marked'
+import toMarkdown from 'to-markdown'
+import utils from './utils'
+import querystring from 'querystring'
 
 function toccerize (markdown, tocTemplate) {
   var tokens = marked.lexer(markdown)

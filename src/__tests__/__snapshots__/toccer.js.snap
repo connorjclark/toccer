@@ -1,0 +1,136 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`toccerize example 1-hello.md works 1`] = `
+"# Hello World!
+
+[](toc)
+
+*   [Section One](#section-one)
+*   [Section Two](#section-two)
+*   [Section Three](#section-three)
+
+## Section One
+
+content
+
+## Section Two
+
+content
+
+## Section Three
+
+content
+"
+`;
+
+exports[`toccerize example 2-subsections.md works 1`] = `
+"# Hello World!
+
+[](toc)
+
+*   [Section One](#section-one)
+*   [Section Two](#section-two)
+    *   [Subsection One](#subsection-one)
+    *   [Subsection Two](#subsection-two)
+*   [Section Three](#section-three)
+
+## Section One
+
+content
+
+## Section Two
+
+### Subsection One
+
+blah
+
+### Subsection Two
+
+blah
+
+content
+
+## Section Three
+
+content
+"
+`;
+
+exports[`toccerize example 3-max-level.md works 1`] = `
+"# Hello World!
+
+[](toc&max-level=2)
+
+*   [Section One](#section-one)
+*   [Section Two](#section-two)
+*   [Section Three](#section-three)
+
+## Section One
+
+content
+
+## Section Two
+
+### Subsection One
+
+blah
+
+### Subsection Two
+
+blah
+
+content
+
+## Section Three
+
+content
+"
+`;
+
+exports[`toccerize example 4-html-escapes.md works 1`] = `
+"# Hello World!
+
+[](toc)
+
+*   [Section One](#section-one)
+*   [Section Two](#section-two)
+*   [Section Three](#section-three)
+
+## Section One
+
+> content
+
+## Section Two
+
+> content
+
+## Section Three
+
+> content
+"
+`;
+
+exports[`toccerize example 5-code-blocks.md works 1`] = `
+"# Hello World!
+
+[](toc)
+
+*   [Section One](#section-one)
+
+## Section One
+
+\`\`\`javascript
+var a = 100;
+var b = 101;
+
+if (a > b) {
+  console.log('lies');
+}
+\`\`\`
+
+\`\`\`
+no language defined
+oh well
+\`\`\`
+"
+`;
