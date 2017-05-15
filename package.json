@@ -1,5 +1,6 @@
 {
   "name": "toccer",
+  "homepage": "https://github.com/Hoten/toccer",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,10 +11,12 @@
     "all": "yarn compile && yarn lint && yarn test",
     "precommit": "yarn all",
     "prepush": "yarn all",
-    "prepublish": "yarn all"
+    "prepublish": "yarn all",
+    "preversion": "yarn all",
+    "postversion": "git push && git push --tags"
   },
   "keywords": [],
-  "author": "",
+  "author": "Connor Clark <cjamcl@gmail.com> (http://cjamcl.com)",
   "license": "ISC",
   "dependencies": {
     "babel-plugin-transform-runtime": "^6.23.0",

@@ -23,7 +23,6 @@ Place link token somewhere in your markdown
 Add some level two headers:
 
 ```markdown
-
 ## This is a header
 
 content
