@@ -3,13 +3,30 @@
 import Mustache from 'mustache'
 import marked from 'marked'
 import toMarkdown from 'to-markdown'
+import fs from 'fs'
 import utils from './utils'
 import querystring from 'querystring'
 import codeTagConverter from './code-tag-converter'
+import defaults from './defaults'
 
-const toccerize = (markdown, tocTemplate) => {
+const getTemplate = options => {
+  if (options.template) {
+    Mustache.parse(options.template)
+    return options.template
+  } else if (options.templatePath) {
+    var template = fs.readFileSync(options.templatePath).toString()
+    Mustache.parse(template)
+    return template
+  } else {
+    throw new Error('Missing template')
+  }
+}
+
+const toccerize = (markdown, opts = {}) => {
+  const options = Object.assign({}, defaults, opts)
+  const tocTemplate = getTemplate(options)
+
   let tokens = marked.lexer(markdown)
-
   let tocTokenIndex
   let tocOptions
 
@@ -48,7 +65,6 @@ const toccerize = (markdown, tocTemplate) => {
   tokens.splice.apply(tokens, [tocTokenIndex + 1, 0].concat(tocTokens))
 
   const html = marked.parser(tokens).replace(/\n<\/code><\/pre>/g, '</code></pre>')
-  console.log(html)
   return toMarkdown(html, {converters: [codeTagConverter]}) + '\n'
 }
 

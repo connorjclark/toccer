@@ -5,11 +5,13 @@ describe('codeTagConverter', function () {
   const htmlWithoutLang = `<pre><code>console.log(1)</code></pre>`
   const htmlWithLang = `<pre><code class="lang-js">console.log(1)</code></pre>`
 
+  const convert = html => toMarkdown(html, {converters: [codeTagConverter]})
+
   it('works without lang', function () {
-    expect(toMarkdown(htmlWithoutLang, {converters: [codeTagConverter]})).toMatchSnapshot()
+    expect(convert(htmlWithoutLang)).toMatchSnapshot()
   })
 
   it('works with lang', function () {
-    expect(toMarkdown(htmlWithLang, {converters: [codeTagConverter]})).toMatchSnapshot()
+    expect(convert(htmlWithLang)).toMatchSnapshot()
   })
 })
