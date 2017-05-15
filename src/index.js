@@ -37,14 +37,7 @@ const toccerize = (markdown, opts = {}) => {
 
     const match = token.text.match(/\[\]\((toc.*)\)/)
     if (match) {
-      tocOptions = match[1].split(/\s+/).reduce(function (acc, option) {
-        let keyValuePair = option.split('=')
-        acc[keyValuePair[0]] = keyValuePair[1] || true
-        return acc
-      }, {})
-
       tocOptions = querystring.parse(match[1])
-
       tocTokenIndex = index
       break
     }
