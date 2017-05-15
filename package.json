@@ -4,20 +4,25 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "babel src/ -d lib/ --ignore __tests__/*",
+    "compile": "rimraf dist/* && babel src/ -d dist/ --ignore __tests__/*",
     "lint": "eslint .",
     "test": "jest --coverage",
-    "precommit": "yarn test",
-    "prepush": "yarn test"
+    "all": "yarn compile && yarn lint && yarn test",
+    "precommit": "yarn all",
+    "prepush": "yarn all",
+    "prepublish": "yarn all"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-runtime": "^6.23.0",
     "glob-expand": "^0.2.1",
     "marked": "^0.3.6",
     "mustache": "^2.3.0",
     "querystring": "^0.2.0",
+    "rimraf": "^2.6.1",
     "to-markdown": "^3.0.4"
   },
   "devDependencies": {
@@ -35,6 +40,6 @@
     "regenerator-runtime": "^0.10.5"
   },
   "bin": {
-    "toccer": "lib/cli.js"
+    "toccer": "dist/cli.js"
   }
 }

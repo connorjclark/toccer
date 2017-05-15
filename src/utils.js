@@ -3,14 +3,14 @@ const flatten = list => list.reduce(
   []
 )
 
-function findSections (tokens, maxLevel) {
-  var sections = []
+const findSections = (tokens, maxLevel) => {
+  const sections = []
 
-  tokens.forEach(function (token) {
+  for (const token of tokens) {
     if (token.type === 'heading') {
-      var headerLevel = token.depth
-      var headerText = token.text.trim()
-      var headerId = headerText.replace(/([\s_/\\])+/g, '-').toLowerCase()
+      const headerLevel = token.depth
+      const headerText = token.text.trim()
+      const headerId = headerText.replace(/([\s_/\\])+/g, '-').toLowerCase()
 
       if (headerLevel >= 2 && headerLevel <= maxLevel) {
         sections.push({
@@ -21,15 +21,15 @@ function findSections (tokens, maxLevel) {
         })
       }
     }
-  })
+  }
 
   return sections
 }
 
-function findIndexOfMatchingListEnd (tokens, startIndex) {
-  var listDepth = 1
+const findIndexOfMatchingListEnd = (tokens, startIndex) => {
+  let listDepth = 1
 
-  for (var i = startIndex + 1; i < tokens.length; i++) {
+  for (let i = startIndex + 1; i < tokens.length; i++) {
     if (tokens[i].type === 'list_start') {
       listDepth += 1
     } else if (tokens[i].type === 'list_end') {
